@@ -1,0 +1,76 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+  <title>DETECT-U</title>
+</head>
+
+<body>
+  <!--HEADER-->
+  <header class="text-gray-400 bg-gray-900 body-font">
+    <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+      <a class="flex title-font font-medium items-center text-white mb-4 md:mb-0" href="/home/">
+        <img src="/static/logo121.jpg">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+        </svg>
+        <span class="ml-3 text-xl"><b><i>DETECT-U</i></b></span>
+      </a>
+      <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
+        <a class="mr-5 hover:text-white" href="/home/">HOME</a>
+        <a class="mr-5 hover:text-white" href="/about/">ABOUT</a>
+        <a class="mr-5 hover:text-white" href="/team/">TEAM</a>
+      </nav>
+    </div>
+  </header>
+  <!--DETECT PICTURE-->
+  <section class="text-gray-400 bg-gray-900 body-font">
+    <div class="container mx-auto flex px-5 py-24 items-center justify-center flex-col">
+      <img class="lg:w-2/6 md:w-3/6 w-5/6 mb-10 object-cover object-center rounded" alt="hero" src="https://miro.medium.com/max/720/0*fLyLkL0pXDKGMWvc.png">
+      <div class="text-center lg:w-2/3 w-full">
+        <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-white">Detecting you </h1>
+        <p class="mb-8 leading-relaxed"><u>Note</u>: Please browse your files and input a <i>not so large dimension
+            picture for best results.</i>
+          <picture></picture>
+        </p>
+        <div class="flex justify-center">
+          <form action="/detect/" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="hidden" name="title" value="@SISA">
+            <input type="file" name="photo" id="image" required>
+            <input type="submit" value="Submit" style="background-color: #7289d9; color: white;"
+              class="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">
+          </form>
+        </div>
+        {% if request.method == "POST" %}
+        <div class="card container">
+          <div class="card ">
+            <img src="/static/{{img}}" alt="" class="card-img-top">
+            <div class="card-footer"><small class="text-muted"><a href="/detect/" style="background-color: #7289d9; color: white;"
+              class="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">Try to another
+              Image</a></small></div>
+          </div>
+        </div>
+        {% endif %}
+    </div>
+    </div>
+  </section>
+  <!--FOOTER-->
+  <footer class="text-gray-400 bg-gray-900 body-font">
+    <div class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
+      <a class="flex title-font font-medium items-center md:justify-start justify-center text-white" href="/home/">
+        <img src="/static/logo121.jpg">
+        <span class="ml-3 text-xl"><b><i>DETECT-U</i></b></span>
+      </a>
+      <p class="text-sm text-gray-400 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-800 sm:py-2 sm:mt-0 mt-4">
+        © 2022-23 DTU — @SISA <br>Picture Source: @Internet</p> 
+    </div>
+    </div>
+  </footer>
+</body>
+</html>
